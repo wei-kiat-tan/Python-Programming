@@ -1,0 +1,76 @@
+---
+title: "GitHub testing"
+author: "Tan Wei Kiat"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+font_adjustment: -2
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+<style>
+/* Flexbox container to create two-column layout */
+.two-column {
+  display: flex;              /* Use Flexbox for layout */
+  justify-content: space-between;  /* Distribute space between columns */
+  align-items: flex-start;    /* Align items at the top */
+}
+
+/* Left column for the image */
+.left-column {
+  width: 60%;                 /* Set image section width to 60% */
+  text-align: left;            /* Keep image aligned to the left */
+}
+
+/* Right column for the text */
+.right-column {
+  width: 35%;                 /* Set text section width to 35% */
+  margin-left: 20px;          /* Add margin between the image and text */
+}
+
+/* Add spacing between bullet points */
+.right-column ul li {
+  margin-bottom: 10px;        /* Adjust the spacing between bullet points */
+}
+</style>
+
+#### Overview
+<div class="two-column">
+  <div class="left-column">
+    <!-- Your image and caption -->
+    <figure style="text-align: left;">
+      <img src="C:/Users/weiki/OneDrive/Documents/Masters/GITHUB/Rplot1.jpeg" width="600px">
+      <figcaption style="text-align: left;">Figure 1: Log GDP per capita, Positive Emotions and Annual Average Hours overtime</figcaption>
+    </figure>
+  </div>
+  
+  <div class="right-column">
+    <!-- Your body text in point form with spacing -->
+    <ul>
+      <li>Luxemburg has the highest GDP per capita among the 47 participant economies, achieving it with working hours less than 40.</li>
+      <li>Majority of the countries achieved excellent and good category rating for Positive emotions with minor achieving bad category</li>
+      <li>Size of the dots in Figure 1 & 2 is dependent on the Annual Average hours. Longer hours imply bigger dots.</li>
+      <li>Different colours indicate different positive emotions categories.</li>
+    </ul>
+  </div>
+</div>
