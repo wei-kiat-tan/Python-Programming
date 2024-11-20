@@ -455,6 +455,8 @@ H₁ (Alternative Hypothesis): The coefficient price per unit is not equal to ze
 
 Based on the values obtained for OLS regression, the p-value obtained for price per unit is very small below 0.05 while the estimate obtained is 2.4898. Thus, at 5% significance level, the null hypothesis is rejected and the estimate obtained is statistically significant, indicating that price per unit has a meaningful effect on total amount.
 
+---
+
 For quantity:
 
 H₀ (Null Hypothesis): The coefficient for quantity is equal to zero.
@@ -463,6 +465,8 @@ H₁ (Alternative Hypothesis): The coefficient for quantity is not equal to zero
 
 Based on the values obtained for OLS regression, the p-value obtained for quantity is very small below 0.05 while the estimate obtained is 179.7758. Thus, at 5% significance level, the null hypothesis is rejected and the estimate obtained is statistically significant, indicating that quantity has a meaningful effect on total amount.
 
+---
+
 For intercept value:
 
 H₀ (Null Hypothesis): The coefficient for intercept is equal to zero.
@@ -470,6 +474,8 @@ H₀ (Null Hypothesis): The coefficient for intercept is equal to zero.
 H₁ (Alternative Hypothesis): The coefficient for intercept is not equal to zero.
 
 Based on the values obtained for OLS regression, the p-value obtained for intercept is very small below 0.05 while the estimate obtained is -439.2661. Thus, at 5% significance level, the null hypothesis is rejected and the estimate obtained is statistically significant, but not unrealistic as its impossible for total amount to be negative. The estimate value obtained is a mathematical derviation if price per unit and quantity is 0.
+
+---
 
 To conclude this basic statistical modelling, the relationship between price per unit, quantity and total amount is strongly positive and statistically significant. Using hypotheses testing based on p-values obtained indicate independent variables have a meaningful effect on the dependent variable. Heteeroscedasticity is detected in the OLS multiple linear regression model and robust standard errors is performed to mitigate it but it is accepted nontheless due to varying price per unit amount.
 
