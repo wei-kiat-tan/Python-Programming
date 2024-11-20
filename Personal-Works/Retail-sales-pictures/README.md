@@ -140,7 +140,7 @@ The first thing to do as part of data cleaning is to change the column names to 
 
 **Data Visualisation & Storytelling**
 
-[insert picture]
+![](retailsales_output1.png) 
 
 The picture above is a correlation heat map matrix for columns age, quantity, price per unit and total amount. The main objective is to provide a broad overview which variables in the data have strong relationships with each other, regardless positively or negatively related. Based on the correlation matrix, price per unit and total amount exhibit very strong positive relationship while quantity and total amount exhibit positive but weaker relationship. The rest of the variables are not correlated to each other.
 
@@ -158,11 +158,15 @@ plt.title('Correlation Matrix for Age, Quantity, Price per Unit, and Total Amoun
 plt.yticks(rotation=0)  # Rotate the labels for the y-axis to be horizontal
 plt.show()
 ```
-to insert doughnut chart for gender
+![](retailsales_output2.png) 
 
 From the doughnut chart above, 51% out of 1000 of people in the retail sales data are female while the remaining 49% are males, indicating that there is a relative balanced amount of customers between the 2 genders.
 
-[insert picture] x2 (side-by-side)
+
+Mirroed Histogram of Customer's age by gender    |  Table form for Distribution of Customer's age by gender
+:-------------------------:|:-------------------------:
+![](retailsales_output3.png)  | ![](Screenshot 2024-11-20 100558.png)
+
 
 The figure above from the left shows a mirrored histogram showcasing the age distribution between male and female genders. On the right is a table form showcasing the age histogram bin range and its frequency. From the mirrored histogram, both genders exhibit an uneven age distribution in the histogram with notable higher frequency in certain age groups like 41-43 and 61-64.
 
@@ -230,7 +234,9 @@ histogram_table = pd.DataFrame({
 # Display the table
 histogram_table
 ```
-[insert picture] x2
+Customer's Purchase by Product Category   |  Customer's Purchase by Product Category in Percentage
+:-------------------------:|:-------------------------:
+![](retailsales_output4.png)  |  ![](retailsales_output5.png)
 
 For product categories, there are 3 product categories which are Beauty, Clothing and Electronics in the retail sales data. Left side of the figure shows bar chart of number of customers who bought products for each product category while the right shows the same chart but measured in percentage. From both charts, clothing is the most popular product category among customers at 35.1%, followed closely by electronics at 34.2% and lastly beauty at 30.7%
 
@@ -325,6 +331,8 @@ plt.show()
 ---
 
 **Basic Statistical Modelling**
+
+The main question to investigate how is dependent variable total amount affected in response to independent variables like price per unit and quantifying the strength of the relationship between the independent and dependeent variables. 
 
 ```python
 # Step 1: Define features (X) and target (y), excluding Gender and Product Category
