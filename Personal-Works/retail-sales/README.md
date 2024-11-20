@@ -234,9 +234,9 @@ histogram_table = pd.DataFrame({
 # Display the table
 histogram_table
 ```
-Customer's Purchase by Product Category   |  Customer's Purchase by Product Category in Percentage
-:-------------------------:|:-------------------------:
-![](retailsales_output4.png)  |  ![](retailsales_output5.png)
+![](retailsales_output4.png) 
+
+![](retailsales_output5.png)
 
 For product categories, there are 3 product categories which are Beauty, Clothing and Electronics in the retail sales data. Left side of the figure shows bar chart of number of customers who bought products for each product category while the right shows the same chart but measured in percentage. From both charts, clothing is the most popular product category among customers at 35.1%, followed closely by electronics at 34.2% and lastly beauty at 30.7%
 
