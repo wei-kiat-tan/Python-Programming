@@ -367,7 +367,47 @@ print(f"\nDurbin-Watson Statistic: {dw_statistic}")
 bp_test = het_breuschpagan(model.resid, X_train_df)
 print(f"\nBreusch-Pagan Test p-value: {bp_test[1]}")
 ```
-In step 7, heteroscedasticity is detected, indicating presence of unequal variance of the residuals over a range of measured values. To mitigate, robust standard errors is performed below but it will not be able to remove heteroscedasticity completely. This is mainly due to varying price per unit, resulting in unequal variance of residuals over the range of measured values performed. F-statistic should be interpreted with caution due to presence of heteroscedasticity. 
+
+```
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           total amount   R-squared:                       0.854
+Model:                            OLS   Adj. R-squared:                  0.853
+Method:                 Least Squares   F-statistic:                     2328.
+Date:                Tue, 19 Nov 2024   Prob (F-statistic):               0.00
+Time:                        22:59:23   Log-Likelihood:                -5434.3
+No. Observations:                 800   AIC:                         1.087e+04
+Df Residuals:                     797   BIC:                         1.089e+04
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+const           -439.2661     19.687    -22.312      0.000    -477.912    -400.621
+price per unit     2.4898      0.040     61.781      0.000       2.411       2.569
+quantity         179.7758      6.772     26.547      0.000     166.483     193.069
+==============================================================================
+Omnibus:                        1.135   Durbin-Watson:                   1.989
+Prob(Omnibus):                  0.567   Jarque-Bera (JB):                1.069
+Skew:                          -0.089   Prob(JB):                        0.586
+Kurtosis:                       3.024   Cond. No.                         699.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+Variance Inflation Factor (VIF):
+          Feature       VIF
+0           const  6.638995
+1  price per unit  1.001528
+2        quantity  1.001528
+
+Durbin-Watson Statistic: 1.9892655724160198
+
+Breusch-Pagan Test p-value: 1.972245868496469e-50
+```
+
+In step 7, heteroscedasticity is detected as the Breusch-Pagan Test p-value is very small. This indicates presence of unequal variance of the residuals over a range of measured values. To mitigate, robust standard errors is performed below but it will not be able to remove heteroscedasticity completely. This is mainly due to varying price per unit, resulting in unequal variance of residuals over the range of measured values performed. F-statistic should be interpreted with caution due to presence of heteroscedasticity. 
 
 ```python
 # Step 1: Fit the regression model using statsmodels with robust standard errors
@@ -377,6 +417,32 @@ model.robust = OLS(y_train, X_train_df).fit(cov_type='HC3')  # Using 'HC3' for r
 print(model.robust.summary())
 ```
 
+```
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           total amount   R-squared:                       0.854
+Model:                            OLS   Adj. R-squared:                  0.853
+Method:                 Least Squares   F-statistic:                     1325.
+Date:                Tue, 19 Nov 2024   Prob (F-statistic):          3.42e-254
+Time:                        22:59:23   Log-Likelihood:                -5434.3
+No. Observations:                 800   AIC:                         1.087e+04
+Df Residuals:                     797   BIC:                         1.089e+04
+Df Model:                           2                                         
+Covariance Type:                  HC3                                         
+==================================================================================
+                     coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------
+const           -439.2661     22.422    -19.591      0.000    -483.212    -395.321
+price per unit     2.4898      0.056     44.527      0.000       2.380       2.599
+quantity         179.7758      8.683     20.704      0.000     162.757     196.794
+==============================================================================
+Omnibus:                        1.135   Durbin-Watson:                   1.989
+Prob(Omnibus):                  0.567   Jarque-Bera (JB):                1.069
+Skew:                          -0.089   Prob(JB):                        0.586
+Kurtosis:                       3.024   Cond. No.                         699.
+==============================================================================
 
-
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC3)
+```
 
