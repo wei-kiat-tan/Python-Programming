@@ -163,7 +163,7 @@ plt.show()
 From the doughnut chart above, 51% out of 1000 of people in the retail sales data are female while the remaining 49% are males, indicating that there is a relative balanced amount of customers between the 2 genders.
 
 
-Mirroed Histogram of Customer's age by gender    |  Table form for Distribution of Customer's age by gender
+Mirrored Histogram of Customer's age by gender    |  Table form for Distribution of Customer's age by gender
 :-------------------------:|:-------------------------:
 ![](retailsales_output3.png)  | ![](Screenshot 2024-11-20 100558.png)
 
