@@ -1,4 +1,0 @@
-**About**
----
-
-Python Programming Projects
