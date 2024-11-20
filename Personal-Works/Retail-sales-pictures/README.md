@@ -1,16 +1,16 @@
-**Exploratory Data Analysis and Basic Statistical Modelling with Python**
+# Exploratory Data Analysis and Basic Statistical Modelling with Python
 
 This is a simple exercise using retail sales data obtained from Kaggle. The main objective of this simple exercise is to firstly gain exposure to python programming and demonstrate competency using python programming in performing exploratory data analysis and basic statistical modelling.
 
-**Contents**
+## Table of Contents
+- [Importing libraries and data](#importing-libraries-and-data)
+- [Data Examination and cleaning](#data-examination-and-cleaning)
+- [Data Visualisation and Storytelling](#data-visualisation-and-storytelling)
+- [Basic Statistical Modelling](#basic-statistical-modelling)
 
-1. Importing libraries and data
-2. Data Examination & cleaning
-3. Data Visualisation & Storytelling
-4. Basic Statistical Modelling
 
 ---
-**Importing libraries and data**
+## Importing libraries and data
 
 ```python
 import pandas as pd
@@ -33,7 +33,7 @@ df = pd.read_csv("C:/Users/weiki/practice datasets/retail_sales_dataset.csv")
 
 ---
 
-**Data Examination & cleaning**
+## Data Examination and cleaning
 
 Starting off, retail sales data set is examined to view the column names, data summary, information about the data frame, row and column numbers. PandasGui is used to view the entire data frame.
 
@@ -138,7 +138,7 @@ The first thing to do as part of data cleaning is to change the column names to 
 
 ---
 
-**Data Visualisation & Storytelling**
+## Data Visualisation and Storytelling
 
 ![](retailsales_output1.png) 
 
@@ -165,7 +165,7 @@ From the doughnut chart above, 51% out of 1000 of people in the retail sales dat
 
 Mirrored Histogram of Customer's age by gender    |  Table form for Distribution of Customer's age by gender
 :-------------------------:|:-------------------------:
-![](retailsales_output3.png)  | ![](Screenshot 2024-11-20 100558.png)
+![](retailsales_output3.png)  | ![](histogram_table.png)
 
 
 The figure above from the left shows a mirrored histogram showcasing the age distribution between male and female genders. On the right is a table form showcasing the age histogram bin range and its frequency. From the mirrored histogram, both genders exhibit an uneven age distribution in the histogram with notable higher frequency in certain age groups like 41-43 and 61-64.
@@ -330,9 +330,13 @@ plt.show()
 
 ---
 
-**Basic Statistical Modelling**
+## Basic Statistical Modelling
 
-The main question to investigate how is dependent variable total amount affected in response to independent variables like price per unit and quantifying the strength of the relationship between the independent and dependeent variables. 
+The main question to investigate how is dependent variable total amount affected in response to independent variables like price per unit and quantifying the strength of the relationship between the independent and dependeent variables. Earlier in the correlation heat map matrix, it is understood that total amount, price per unit and quantity have strong positive relationships with each other. Using Ordinary least square (OLS) regression, observed relationships between the independent and dependent variables can be assessed whether they are statistically significant. Using p-values, hypotheses test is performed whether certain independent variables have a meaningful effect on the dependent variable.
+
+The first step is to define the independent and dependent variables for the multiple linear regression. independent variables (X) are price per unit and quantity while dependent variable is total amount (Y). Step 2 ensures a robust regression model is created by splitting the data. Hence, ensuring that the model is properly validated, making it more reliable and generalizable for real-world use.
+
+Step 3 adds an intercept value to the regression model while step 4 fits the regression model with OLS using statsmodel library. Step 5 to 7 are tests for multicollinearity, autocorrelation and heteroscedasticity respectively and step 8 prints a summary of the OLS multiple linear regression. 
 
 ```python
 # Step 1: Define features (X) and target (y), excluding Gender and Product Category
@@ -348,41 +352,29 @@ X_train_df = add_constant(X_train)
 # Step 4: Fit the regression model using statsmodels
 model = OLS(y_train, X_train_df).fit()
 
-# Step 5: Print the regression summary
-print(model.summary())
-
-# Step 6: Perform Multicollinearity Test using VIF
+# Step 5: Perform Multicollinearity Test using VIF
 vif_data = pd.DataFrame()
 vif_data["Feature"] = X_train_df.columns
 vif_data["VIF"] = [variance_inflation_factor(X_train_df.values, i) for i in range(X_train_df.shape[1])]
 print("\nVariance Inflation Factor (VIF):")
 print(vif_data)
 
-# Step 7: Perform Autocorrelation Test using Durbin-Watson
+# Step 6: Perform Autocorrelation Test using Durbin-Watson
 dw_statistic = durbin_watson(model.resid)
 print(f"\nDurbin-Watson Statistic: {dw_statistic}")
 
-# Step 8: Perform Heteroscedasticity Test using Breusch-Pagan
+# Step 7: Perform Heteroscedasticity Test using Breusch-Pagan
 bp_test = het_breuschpagan(model.resid, X_train_df)
 print(f"\nBreusch-Pagan Test p-value: {bp_test[1]}")
 ```
+In step 7, heteroscedasticity is detected, indicating presence of unequal variance of the residuals over a range of measured values. To mitigate, robust standard errors is performed below but it will not be able to remove heteroscedasticity completely. This is mainly due to varying price per unit, resulting in unequal variance of residuals over the range of measured values performed. F-statistic should be interpreted with caution due to presence of heteroscedasticity. 
 
 ```python
-# Step 1: Define features (X) and target (y), excluding Gender and Product Category
-X = df[['price per unit', 'quantity']]
-y = df['total amount']
+# Step 1: Fit the regression model using statsmodels with robust standard errors
+model.robust = OLS(y_train, X_train_df).fit(cov_type='HC3')  # Using 'HC3' for robust standard errors
 
-# Step 2: Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Step 3: Add a constant for the intercept to the training features
-X_train_df = add_constant(X_train)
-
-# Step 4: Fit the regression model using statsmodels with robust standard errors
-model = OLS(y_train, X_train_df).fit(cov_type='HC3')  # Using 'HC3' for robust standard errors
-
-# Step 5: Print the regression summary
-print(model.summary())
+# Step 2: Print the regression summary
+print(model.robust.summary())
 ```
 
 
